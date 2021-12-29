@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,15 +23,20 @@ public class Telephone implements Serializable{
 	private String numero;
 	private String description;
 	
+	@ManyToOne
+	@JoinColumn(name="client_id")
+	private Client client;
+	
 	public Telephone() {
 		super();
 	}
 
-	public Telephone(Long id, String numero, String description) {
+	public Telephone(Long id, String numero, String description, Client client) {
 		super();
 		this.id = id;
 		this.numero = numero;
 		this.description = description;
+		this.client = client;
 	}
 	
 	public Long getId() {
@@ -54,6 +61,14 @@ public class Telephone implements Serializable{
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
 	}
 
 	@Override

@@ -1,12 +1,15 @@
 package com.asdb.controleclientes.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -20,6 +23,9 @@ public class Client implements Serializable {
 	private Long id;
 	private String name;
 	private String adress;
+	
+	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+	private List<Telephone> telephones;
 	
 	public Client() {
 	}
@@ -55,6 +61,14 @@ public class Client implements Serializable {
 		this.adress = adress;
 	}
 	
+	public List<Telephone> getTelephones() {
+		return telephones;
+	}
+
+	public void setTelephones(List<Telephone> telephones) {
+		this.telephones = telephones;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

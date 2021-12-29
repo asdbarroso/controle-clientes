@@ -1,6 +1,8 @@
 package com.asdb.controleclientes.config;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -10,7 +12,6 @@ import org.springframework.context.annotation.Profile;
 import com.asdb.controleclientes.entities.Client;
 import com.asdb.controleclientes.entities.Telephone;
 import com.asdb.controleclientes.repositories.ClientRepository;
-import com.asdb.controleclientes.repositories.TelephoneRepository;
 
 @Configuration
 @Profile("test")
@@ -18,9 +19,6 @@ public class TestConfig implements CommandLineRunner {
 
 	@Autowired
 	private ClientRepository clientRepository;
-	
-	@Autowired
-	private TelephoneRepository telephoneRepository;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -30,10 +28,15 @@ public class TestConfig implements CommandLineRunner {
 		
 		clientRepository.saveAll(Arrays.asList(c1, c2));
 		
-		Telephone t1 = new Telephone(null, "(021) 3333-4444", "Fixo");
-		Telephone t2 = new Telephone(null, "(021) 9999-8888", "Celular");
+		Telephone t1 = new Telephone(null, "(021) 3333-4444", "Fixo", c1);
+		Telephone t2 = new Telephone(null, "(021) 9999-8888", "Celular", c1);
 		
-		telephoneRepository.saveAll(Arrays.asList(t1, t2));
+		List<Telephone> phones = new ArrayList<>();
+		phones.add(t1);
+		phones.add(t2);
+		c1.setTelephones(phones);
+		
+		clientRepository.save(c1);
 
 	}
 
