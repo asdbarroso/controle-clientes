@@ -10,27 +10,28 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_client")
-public class Client implements Serializable {
+@Table(name = "tb_telephone")
+public class Telephone implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String name;
-	private String adress;
+	private String numero;
+	private String description;
 	
-	public Client() {
+	public Telephone() {
+		super();
 	}
 
-	public Client(Long id, String name, String adress) {
+	public Telephone(Long id, String numero, String description) {
 		super();
 		this.id = id;
-		this.name = name;
-		this.adress = adress;
+		this.numero = numero;
+		this.description = description;
 	}
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -39,22 +40,22 @@ public class Client implements Serializable {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getNumero() {
+		return numero;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNumero(String numero) {
+		this.numero = numero;
 	}
 
-	public String getAdress() {
-		return adress;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setAdress(String adress) {
-		this.adress = adress;
+	public void setDescription(String description) {
+		this.description = description;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -68,8 +69,8 @@ public class Client implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Client other = (Client) obj;
+		Telephone other = (Telephone) obj;
 		return Objects.equals(id, other.id);
 	}
-
+	
 }
