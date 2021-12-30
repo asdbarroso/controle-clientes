@@ -31,13 +31,19 @@ public class TestConfig implements CommandLineRunner {
 		
 		Contact t1 = new Contact(null, "(021) 3333-4444", "Fixo", TypeOfContact.PHONE, c1);
 		Contact t2 = new Contact(null, "(021) 9999-8888", "Celular", TypeOfContact.MOBILE, c1);
+		Contact t3 = new Contact(null, "jack@gmail.com", "Fixo", TypeOfContact.EMAIL, c2);
+		Contact t4 = new Contact(null, "paul@gmail.com", "Fixo", TypeOfContact.EMAIL, c1);
 		
-		List<Contact> phones = new ArrayList<>();
-		phones.add(t1);
-		phones.add(t2);
-		c1.setTelephones(phones);
+		List<Contact> contacts = new ArrayList<>();
+		contacts.add(t1);
+		contacts.add(t2);
+		c1.setTelephones(contacts);
+		List<Contact> contacts2 = new ArrayList<>();
+		contacts2.add(t3);
+		contacts2.add(t4);
+		c2.setTelephones(contacts2);
 		
-		clientRepository.save(c1);
+		clientRepository.saveAll(Arrays.asList(c1, c2));
 
 	}
 
