@@ -10,7 +10,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.asdb.controleclientes.entities.Client;
-import com.asdb.controleclientes.entities.Telephone;
+import com.asdb.controleclientes.entities.Contact;
+import com.asdb.controleclientes.entities.enums.TypeOfContact;
 import com.asdb.controleclientes.repositories.ClientRepository;
 
 @Configuration
@@ -28,10 +29,10 @@ public class TestConfig implements CommandLineRunner {
 		
 		clientRepository.saveAll(Arrays.asList(c1, c2));
 		
-		Telephone t1 = new Telephone(null, "(021) 3333-4444", "Fixo", c1);
-		Telephone t2 = new Telephone(null, "(021) 9999-8888", "Celular", c1);
+		Contact t1 = new Contact(null, "(021) 3333-4444", "Fixo", TypeOfContact.PHONE, c1);
+		Contact t2 = new Contact(null, "(021) 9999-8888", "Celular", TypeOfContact.MOBILE, c1);
 		
-		List<Telephone> phones = new ArrayList<>();
+		List<Contact> phones = new ArrayList<>();
 		phones.add(t1);
 		phones.add(t2);
 		c1.setTelephones(phones);

@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.asdb.controleclientes.entities.Telephone;
+import com.asdb.controleclientes.entities.Contact;
 import com.asdb.controleclientes.repositories.TelephoneRepository;
 import com.asdb.controleclientes.services.exceptions.ResourceNotFoundException;
 
@@ -16,12 +16,12 @@ public class TelephoneService {
 	@Autowired
 	private TelephoneRepository repository;
 
-	public List<Telephone> findAll(){
+	public List<Contact> findAll(){
 		return repository.findAll();
 	}
 	
-	public Telephone findById(Long id) {
-		Optional <Telephone> telephone = repository.findById(id);
+	public Contact findById(Long id) {
+		Optional <Contact> telephone = repository.findById(id);
 		return telephone.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	

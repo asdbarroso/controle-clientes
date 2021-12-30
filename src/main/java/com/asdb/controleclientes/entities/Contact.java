@@ -11,34 +11,39 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.asdb.controleclientes.entities.enums.TypeOfContact;
+
 @Entity
 @Table(name = "tb_telephone")
-public class Telephone implements Serializable{
+public class Contact implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String numero;
+	private String number;
 	private String description;
-	
+
 	@ManyToOne
-	@JoinColumn(name="client_id")
+	@JoinColumn(name = "client_id")
 	private Client client;
-	
-	public Telephone() {
+
+	private Integer typeContact;
+
+	public Contact() {
 		super();
 	}
 
-	public Telephone(Long id, String numero, String description, Client client) {
+	public Contact(Long id, String number, String description, TypeOfContact typeContact, Client client) {
 		super();
 		this.id = id;
-		this.numero = numero;
+		this.number = number;
 		this.description = description;
+		setTypeContact(typeContact);
 		this.client = client;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -47,12 +52,12 @@ public class Telephone implements Serializable{
 		this.id = id;
 	}
 
-	public String getNumero() {
-		return numero;
+	public String getNumber() {
+		return number;
 	}
 
-	public void setNumero(String numero) {
-		this.numero = numero;
+	public void setNumber(String number) {
+		this.number = number;
 	}
 
 	public String getDescription() {
@@ -62,13 +67,23 @@ public class Telephone implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	public Client getClient() {
 		return client;
 	}
 
 	public void setClient(Client client) {
 		this.client = client;
+	}
+
+	public TypeOfContact getTypeContact() {
+		return TypeOfContact.valueOf(typeContact);
+	}
+
+	public void setTypeContact(TypeOfContact typeContact) {
+		if (typeContact != null) {
+			this.typeContact = typeContact.getNum();
+		}
 	}
 
 	@Override
@@ -84,8 +99,8 @@ public class Telephone implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Telephone other = (Telephone) obj;
+		Contact other = (Contact) obj;
 		return Objects.equals(id, other.id);
 	}
-	
+
 }

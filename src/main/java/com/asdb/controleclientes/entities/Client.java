@@ -25,7 +25,7 @@ public class Client implements Serializable {
 	private String adress;
 	
 	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
-	private List<Telephone> telephones;
+	private List<Contact> telephones;
 	
 	public Client() {
 	}
@@ -61,11 +61,11 @@ public class Client implements Serializable {
 		this.adress = adress;
 	}
 	
-	public List<Telephone> getTelephones() {
+	public List<Contact> getTelephones() {
 		return telephones;
 	}
 
-	public void setTelephones(List<Telephone> telephones) {
+	public void setTelephones(List<Contact> telephones) {
 		this.telephones = telephones;
 	}
 
